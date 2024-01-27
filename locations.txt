@@ -1,0 +1,51 @@
+LOCATION -1
+0
+That way is blocked.
+That way is blocked.
+END
+
+BUTTERY
+0
+You are inside the Buttery. In front of you is the bustling hallway. You smell pizza, the most popular resort for students.
+You are inside one of the busiest cafeterias of the UofT, the Buttery. It's usually packed at this time of the day, and today is no
+exception. The delicious smell of the Pizza Pizza pizzas is very tempting, I know. But you have to hurry up and go to your exam first.
+You can reward yourself with a pizza at the Buttery later.
+END
+
+TRINITY
+1
+You are at the Trinity Quad. On your north, is the doors leading to the Buttery and on your east, there is another door
+and you can see people walking at the Philosopher's walk.
+This place is called the "QUAD". A perfect shaped quadrangle which is a safe garden for Trinity residences at all times.
+You are facing north and ahead of you is a door that leads to outside to the Buttery, Trinity's cafeteria. On your west,there is another door
+and you can see people walking at the Philosopher's walk.
+END
+
+QUEEN'S PARK #Ceren
+2
+You are in at the upper end of the Queens park. On your right, you can see the glorious EJ Pratt Library.
+You are at the Queen's Park. Take a look around! People are walking their dogs, singing, kids are playing football. Queen's
+park is a very lively meeting place for families to enjoy the grenery in a bustling city like Toronto. On your left, you see
+the Trinity College, daring people to pass by without taking an picture of the architecture. On your right, you see the EJ Pratt
+Library.
+END
+
+
+EJ PRATT #Defne
+4
+You are outside the Robarts library.
+You are outside the Robarts library on a crowded street. There is a smell of coffee in the air.
+END
+
+VICTORIA #Defne
+5
+You are outside the Robarts library.
+You are outside the Robarts library on a crowded street. There is a smell of coffee in the air.
+END
+
+
+EXAM CENTER #Defne
+6
+You are outside the Robarts library.
+You are outside the Robarts library on a crowded street. There is a smell of coffee in the air.
+END
