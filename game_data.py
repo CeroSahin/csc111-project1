@@ -18,13 +18,56 @@ please consult our Course Syllabus.
 
 This file is Copyright (c) 2024 CSC111 Teaching Team
 """
-from typing import Optional, TextIO
+from typing import Optional
 
+
+class Item:
+    """An item in our text adventure game world.
+
+    Instance Attributes:
+        - name
+        - start_position
+        - target_position
+        - target_points
+        - current_position
+
+    Representation Invariants:
+        - self.name in ["Cheat Sheet", "T-Card", "Lucky Pen", "Answer Sheet"]
+        - 0 <= self.start_position <= 5
+        - self.start_position != self.target_position
+        - 0 <= self.target_position <= 5
+        - 0 < self.target_points
+        - 0 <= self.current_position <= 5
+    """
+    name: str
+    start_position: int
+    target_position: int
+    target_points: int
+    current_position: int
+
+    def __init__(self, name: str, start: int, target: int, target_points: int) -> None:
+        """Initialize a new item.
+        """
+        # NOTES:
+        # This is just a suggested starter class for Item.
+        # You may change these parameters and the data available for each Item object as you see fit.
+        # (The current parameters correspond to the example in the handout).
+        # Consider every method in this Item class as a "suggested method".
+        #
+        # The only thing you must NOT change is the name of this class: Item.
+        # All item objects in your game MUST be represented as an instance of this class.
+
+        self.name = name
+        self.start_position = start
+        self.target_position = target
+        self.target_points = target_points
+        self.current_position = start
 
 class Location:
     """A location in our text adventure game world.
 
     Instance Attributes:
+        - name
         - brief
         - long
         - x
@@ -34,16 +77,30 @@ class Location:
         - visited
         - id
     Representation Invariants:
-        - # TODO
-        # DEFNE
+        - len(self.brief) >= len(self.long)
+        - self.name in self.brief and self.name in self.long
+        - -1 <= self.x <= 1
+        - -1 >= self.y <= 1
+        - 0 <= len(self.items) <= 4
+        - -1 <= self.id <= 5
     """
+    name: str
+    brief: str
+    long: str
+    x: int
+    y: int
+    # posdir: ?
+    items: list[Item]
+    visited: bool
+    id: int
 
-    def __init__(self, x: int, y: int, brief: str, long: str, posdir: [int], items: [Item], id: int) -> None:
+    def __init__(self, name: str, x: int, y: int, brief: str, long: str, items: [Item], id: int) -> None:
         """Initialize a new location.
         """
+        self.name = name
         self.x = x
         self.y = y
-        self.posdir = posdir
+        # self.posdir = posdir
         self.brief = brief
         self.long = long
         self.items = items
@@ -71,46 +128,15 @@ class Location:
         The actions should depend on the items available in the location
         and the x,y position of this location on the world map.
         """
+        #actions = []
+
+
+        return None
+        # depends on position --> which way the player can go/ anywhere expect -1 ["go north", "go south", "go west", "go east", "fly"]
 
         # NOTE: This is just a suggested method
         # i.e. You may remove/modify/rename this as you like, and complete the
         # function header (e.g. add in parameters, complete the type contract) as needed
-
-        # TODO: Complete this method, if you'd like or remove/replace it if you're not using it
-        # DEFNE
-
-class Item:
-    """An item in our text adventure game world.
-
-    Instance Attributes:
-        - name
-        - start_position
-        - target_position
-        - target_points
-        - current_position
-
-    Representation Invariants:
-        - # TODO
-        # DEFNE
-    """
-
-    def __init__(self, name: str, start: int, target: int, target_points: int) -> None:
-        """Initialize a new item.
-        """
-        # NOTES:
-        # This is just a suggested starter class for Item.
-        # You may change these parameters and the data available for each Item object as you see fit.
-        # (The current parameters correspond to the example in the handout).
-        # Consider every method in this Item class as a "suggested method".
-        #
-        # The only thing you must NOT change is the name of this class: Item.
-        # All item objects in your game MUST be represented as an instance of this class.
-
-        self.name = name
-        self.start_position = start
-        self.target_position = target
-        self.target_points = target_points
-        self.current_position = start
 
 
 class Player:
@@ -127,13 +153,23 @@ class Player:
         - can_fly
 
     Representation Invariants:
-        - # TODO
-        # DEFNE
+        - -1 <= self.x <= 1
+        - -1 <= self.y <= 1
+        - 0 <= len(self.inventory) <= 4
+        - 0 <= self.moves
+        - 0 <= self.score
     """
+    x: int
+    y: int
+    inventory: list[Item]
+    victory: bool
+    moves: int
+    score: int
+    can_fly: bool
 
-    def __init__(self, x: int, y: int) -> None:
+    def __init__(self, x: int, y: int, starting_moves: int) -> None:
         """
-        Initializes a new Player at position (x, y).
+        Initializes a new Player at position (x, y) with a maximum of starting_moves moves.
         """
 
         # NOTES:
@@ -144,7 +180,7 @@ class Player:
         self.y = y
         self.inventory = []
         self.victory = False
-        self.moves = 30
+        self.moves = starting_moves
         self.score = 0
         self.can_fly = False
 
@@ -159,10 +195,15 @@ class World:
 
 
     Representation Invariants:
-        - # DEFNE
+        - all([[-1 <= position <= 1 for position in axis_values] for axis_values in self.map])
+        - all([item.name in ["Cheat Sheet", "T-Card", "Lucky Pen", "Answer Sheet"] for item in items])
+        - all([location.name in ["Buttery", "Trinity", "Queen's Park", "EJ Pratt", "Victoria", "Exam Center", "Location -1"] for location in locations])
     """
+    map: list[list[int]]
+    items: list[Item]
+    locations: list[Location]
 
-    def __init__(self, map_data: TextIO, location_data: TextIO, items_data: TextIO) -> None:
+    def __init__(self, map_data: str, location_data: str, items_data: str) -> None:
         """
         Initialize a new World for a text adventure game, based on the data in the given open files.
 
@@ -190,7 +231,7 @@ class World:
         # 2. Make sure the Item class is used to represent each item.
 
     # NOTE: The method below is REQUIRED. Complete it exactly as specified.
-    def load_map(self, map_data: TextIO) -> list[list[int]]:
+    def load_map(self, map_data: str) -> list[list[int]]:
         """
         Store map from open file map_data as the map attribute of this object, as a nested list of integers like so:
 
@@ -210,19 +251,63 @@ class World:
                 c = [int(m) for m in b]
                 result.append(c)
         return result
+
     # TODO: Complete this method as specified. Do not modify any of this function's specifications.
     # TODO: Add methods for loading location data and item data (see note above).
-    def load_items(self, items_data: TextIO) -> list[Item]:
+    def load_items(self, items_data: str) -> list[Item]:
         """ Reads the items_data and returns a list of items. In our case the
         list should contain the tcard item, cheat sheet item, lucky pen item and answer sheet item.
         """
-        # DEFNE
-        return None
+        result = []
+        with open(items_data) as f:
+            line_list = f.readlines()
+            for line in line_list:
+                a = line.strip()
+                b = a.split()
+                name = ""
+                for item in b:
+                    if b.index(item) >= 3:
+                        name += item + " "
+                new_item = Item(name, int(b[0]), int(b[1]), int(b[2]))
+                result.append(new_item)
 
-    def load_locations(self, location_data: TextIO) -> list[Location]:
+        return result
+
+    def load_locations(self, location_data: str) -> list[Location]:
         """ Reads the location data and returns a list of locations. In our case, there are 5 of them."""
-        # DEFNE
-        return None
+        result = []
+        with open(location_data) as f:
+            line = f.readline().strip()
+            while line is not None:
+                name = line
+                location_id = int(f.readline().strip())
+
+                items_in_location = []
+                for item in self.items:
+                    if item.start_position == location_id:
+                        items_in_location.append(item)
+
+                short_description = f.readline().strip()
+                long_description = ""
+                long_line = f.readline().strip()
+
+                while long_line != "END":
+                    long_description += long_line + " "
+                    long_description = f.readline().strip()
+
+                y = 0
+                x = 0
+                for row in self.map:
+                    for spot in row:
+                        if spot == id:
+                            break
+                        x += 1
+                    y += 1
+
+                new_location = Location(name, x, y, short_description, long_description, items_in_location, location_id)
+                result.append(new_location)
+
+        return result
 
     # NOTE: The method below is REQUIRED. Complete it exactly as specified.
     def get_location(self, x: int, y: int) -> Optional[Location]:
@@ -230,10 +315,19 @@ class World:
          that position. Otherwise, return None. (Remember, locations represented by the number -1 on the map should
          return None.)
         """
-        # DEFNE
-        # TODO: Complete this method as specified. Do not modify any of this function's specifications.
+        for location in self.locations:
+            if location.x == x and location.y == y:
+                return location
 
-    def handle_action(self, player, location, action):
+        return
+
+    def update_position(self, player: Player, choice: str) -> None:
+        #determine player's location if go west ..., if go east...,
+        #if choice == "go north"
+        return None
+
+
+    def handle_action(self, player: Player, location: Location, action: str):
         if action == "look":
             print(location.brief if location.visited else location.long)
         elif action == "inventory":
@@ -254,9 +348,9 @@ class World:
     def pick_item(self, player: Player, item: Item, player_location: Location):
         if item.current_position == player_location.id:
             player.inventory.append(item)
-            player_location.items.pop(item)
+            player_location.items.remove(item)
             player.score += item.target_points
-            check_fly(player)
+            self.check_fly(player)
 
     def find_item(self, name):
         for item in self.items:

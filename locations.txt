@@ -1,10 +1,10 @@
-LOCATION -1
-0
+Location -1
+-1
 That way is blocked.
 That way is blocked.
 END
 
-BUTTERY
+Buttery
 0
 You are inside the Buttery. In front of you is the bustling hallway. You smell pizza, the most popular resort for students.
 You are inside one of the busiest cafeterias of the UofT, the Buttery. It's usually packed at this time of the day, and today is no
@@ -12,40 +12,47 @@ exception. The delicious smell of the Pizza Pizza pizzas is very tempting, I kno
 You can reward yourself with a pizza at the Buttery later.
 END
 
-TRINITY
+Trinity
 1
-You are at the Trinity Quad. On your north, is the doors leading to the Buttery and on your east, there is another door
-and you can see people walking at the Philosopher's walk.
+You are at the Trinity Quad. On your north, is the doors leading to the Buttery and on your east, there is another door and you can see people walking at the Philosopher's walk.
 This place is called the "QUAD". A perfect shaped quadrangle which is a safe garden for Trinity residences at all times.
 You are facing north and ahead of you is a door that leads to outside to the Buttery, Trinity's cafeteria. On your west,there is another door
 and you can see people walking at the Philosopher's walk.
 END
 
-QUEEN'S PARK #Ceren
+Queen's Park
 2
 You are in at the upper end of the Queens park. On your right, you can see the glorious EJ Pratt Library.
 You are at the Queen's Park. Take a look around! People are walking their dogs, singing, kids are playing football. Queen's
 park is a very lively meeting place for families to enjoy the grenery in a bustling city like Toronto. On your left, you see
-the Trinity College, daring people to pass by without taking an picture of the architecture. On your right, you see the EJ Pratt
+the Trinity College, daring people to pass by without taking a picture of the architecture. On your right, you see the EJ Pratt
 Library.
 END
 
 
-EJ PRATT #Defne
+EJ Pratt
+3
+You are inside EJ Pratt. Almost all the desks are occupied with many students trying to finish their work. One of the empty desks has a couple of papers on it.
+You are in the second floor of EJ Pratt. It's the finals season so, you can see many students cramming to do their last
+revision before their exam. However, there are still some students chatting and eating food in the corner. You see a couple
+of empty desks. One of them has a suspicous looking paper on it.
+END
+
+Victoria
 4
-You are outside the Robarts library.
-You are outside the Robarts library on a crowded street. There is a smell of coffee in the air.
+You are in the middle of Victoria College. On your west is the iconic castle-like Victoria College building.
+You are standing in the middle of the field in front of the reddish Victoria College building. On your east you see the
+Burwash residence that looks like it came out of the Harry Potter books and students who are rushing to reach their
+classes. However, this time you also see a reddish door that you have not seen before. On your south is the EJ Pratt library that
+is always crowded at this hour of the day.
 END
 
-VICTORIA #Defne
+
+Exam Center
 5
-You are outside the Robarts library.
-You are outside the Robarts library on a crowded street. There is a smell of coffee in the air.
-END
-
-
-EXAM CENTER #Defne
-6
-You are outside the Robarts library.
-You are outside the Robarts library on a crowded street. There is a smell of coffee in the air.
+You are inside the Exam Center. Be quick! It's almost time for your exam.
+You've arrived at the Exam Center. You see a crowd of anxious students all waiting to take their final exam and start
+their holiday. Some are trying to look at their notes one last time and some are trying to calm themselves down while
+looking at their phones. In front of you is the room that you are supposed to take your exam in. On your left you see
+extra notes that someone left and on your right are the washrooms.
 END

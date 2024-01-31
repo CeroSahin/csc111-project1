@@ -25,8 +25,8 @@ from game_data import World, Item, Location, Player
 
 # Note: You may modify the code below as needed; the following starter template are just suggestions
 if __name__ == "__main__":
-    w = World(open("map.txt"), open("locations.txt"), open("items.txt"))
-    p = Player(0, 0)  # set starting location of player; you may change the x, y coordinates here as appropriate
+    w = World("map.txt", "locations.txt", "items.txt")
+    p = Player(0, 0, 30)  # set starting location of player; you may change the x, y coordinates here as appropriate
 
     menu = ["look", "inventory", "score", "quit", "back"]
     commands = ["go north", "go south", "go west", "go east", "fly"]
@@ -39,7 +39,7 @@ if __name__ == "__main__":
             print("Congratulations and good luck on the test!")
             p.victory = True
 
-        if p.moves <= 0:
+        if p.moves == 0:
             print("Time is over, Sorry pal!")
             break
 
@@ -54,8 +54,8 @@ if __name__ == "__main__":
 
         print("What to do? \n")
         print("[menu]")
-        for action in location.available_actions():
-            print(action)
+        #for action in location.available_actions():
+        #    print(action)
         choice = input("\nEnter action: ")
 
         if choice == "[menu]":
@@ -66,12 +66,12 @@ if __name__ == "__main__":
 
         if choice in commands:  # if player wants to move.
             if choice in location.available_actions():
-                w.update_position(p, location, choice)
-            p.moves += 1
+                w.update_position(p, choice)
+            p.moves -= 1
         elif choice in picks:  # if player wants to pick up objects.
             item = w.find_item(choice.split()[1])
             w.pick_item(p, item, location)
-            p.moves += 1
+            p.moves -= 1
         elif choice == "quit":
             print("Good Game!")
             break
