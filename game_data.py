@@ -18,7 +18,7 @@ please consult our Course Syllabus.
 
 This file is Copyright (c) 2024 CSC111 Teaching Team
 """
-from typing import Optional
+from typing import Optional, TextIO
 
 
 class Item:
@@ -48,20 +48,12 @@ class Item:
     def __init__(self, name: str, start: int, target: int, target_points: int) -> None:
         """Initialize a new item.
         """
-        # NOTES:
-        # This is just a suggested starter class for Item.
-        # You may change these parameters and the data available for each Item object as you see fit.
-        # (The current parameters correspond to the example in the handout).
-        # Consider every method in this Item class as a "suggested method".
-        #
-        # The only thing you must NOT change is the name of this class: Item.
-        # All item objects in your game MUST be represented as an instance of this class.
-
         self.name = name
         self.start_position = start
         self.target_position = target
         self.target_points = target_points
         self.current_position = start
+
 
 class Location:
     """A location in our text adventure game world.
@@ -89,7 +81,6 @@ class Location:
     long: str
     x: int
     y: int
-    # posdir: ?
     items: list[Item]
     visited: bool
     id: int
@@ -100,43 +91,11 @@ class Location:
         self.name = name
         self.x = x
         self.y = y
-        # self.posdir = posdir
         self.brief = brief
         self.long = long
         self.items = items
         self.visited = False
         self.id = id
-        # NOTES:
-        # Data that could be associated with each Location object:
-        # a position in the world map,
-        # a brief description,
-        # a long description,
-        # a list of available commands/directions to move,
-        # items that are available in the location,
-        # and whether the location has been visited before.
-        # Store these as you see fit, using appropriate data types.
-        #
-        # This is just a suggested starter class for Location.
-        # You may change/add parameters and the data available for each Location object as you see fit.
-        #
-        # The only thing you must NOT change is the name of this class: Location.
-        # All locations in your game MUST be represented as an instance of this class.
-
-    def available_actions(self):
-        """
-        Return the available actions in this location.
-        The actions should depend on the items available in the location
-        and the x,y position of this location on the world map.
-        """
-        #actions = []
-
-
-        return None
-        # depends on position --> which way the player can go/ anywhere expect -1 ["go north", "go south", "go west", "go east", "fly"]
-
-        # NOTE: This is just a suggested method
-        # i.e. You may remove/modify/rename this as you like, and complete the
-        # function header (e.g. add in parameters, complete the type contract) as needed
 
 
 class Player:
@@ -171,11 +130,6 @@ class Player:
         """
         Initializes a new Player at position (x, y) with a maximum of starting_moves moves.
         """
-
-        # NOTES:
-        # This is a suggested starter class for Player.
-        # You may change these parameters and the data available for the Player object as you see fit.
-
         self.x = x
         self.y = y
         self.inventory = []
@@ -203,35 +157,18 @@ class World:
     items: list[Item]
     locations: list[Location]
 
-    def __init__(self, map_data: str, location_data: str, items_data: str) -> None:
+    def __init__(self, map_data: TextIO, location_data: TextIO, items_data: TextIO) -> None:
         """
         Initialize a new World for a text adventure game, based on the data in the given open files.
 
         - location_data: name of text file containing location data (format left up to you)
         - items_data: name of text file containing item data (format left up to you)
         """
-
-        # NOTES:
-
-        # map_data should refer to an open text file containing map data in a grid format, with integers separated by a
-        # space, representing each location, as described in the project handout. Each integer represents a different
-        # location, and -1 represents an invalid, inaccessible space.
-
-        # You may ADD parameters/attributes/methods to this class as you see fit.
-        # BUT DO NOT RENAME OR REMOVE ANY EXISTING METHODS/ATTRIBUTES IN THIS CLASS
-
-        # The map MUST be stored in a nested list as described in the load_map() function's docstring below
         self.map = self.load_map(map_data)
         self.items = self.load_items(items_data)
         self.locations = self.load_locations(location_data)
 
-        # NOTE: You may choose how to store location and item data; create your own World methods to handle these
-        # accordingly. The only requirements:
-        # 1. Make sure the Location class is used to represent each location.
-        # 2. Make sure the Item class is used to represent each item.
-
-    # NOTE: The method below is REQUIRED. Complete it exactly as specified.
-    def load_map(self, map_data: str) -> list[list[int]]:
+    def load_map(self, map_data: TextIO) -> list[list[int]]:
         """
         Store map from open file map_data as the map attribute of this object, as a nested list of integers like so:
 
@@ -243,70 +180,46 @@ class World:
         Return this list representation of the map.
         """
         result = []
-        with open(map_data) as f:
-            lines = f.readlines()
-            for x in lines:
-                a = x.strip("\n")
-                b = a.split()
-                c = [int(m) for m in b]
-                result.append(c)
+        lines = map_data.readlines()
+        for line in lines:
+            line = line.strip()
+            row = line.split()
+            res = [eval(i) for i in row]
+            result.append(res)
         return result
 
-    # TODO: Complete this method as specified. Do not modify any of this function's specifications.
-    # TODO: Add methods for loading location data and item data (see note above).
-    def load_items(self, items_data: str) -> list[Item]:
+    def load_items(self, items_data: TextIO) -> list[Item]:
         """ Reads the items_data and returns a list of items. In our case the
         list should contain the tcard item, cheat sheet item, lucky pen item and answer sheet item.
         """
         result = []
-        with open(items_data) as f:
-            line_list = f.readlines()
-            for line in line_list:
-                a = line.strip()
-                b = a.split()
-                name = ""
-                for item in b:
-                    if b.index(item) >= 3:
-                        name += item + " "
-                new_item = Item(name, int(b[0]), int(b[1]), int(b[2]))
-                result.append(new_item)
+        lines = items_data.readlines()
+        for line in lines:
+            line = line.strip()
+            row = line.split()
+            begin = int(row[0])
+            end = int(row[1])
+            points = int(row[2])
+            name = " ".join(row[2:])
+            new_item = Item(name, begin, end, points)
+            result.append(new_item)
 
         return result
 
-    def load_locations(self, location_data: str) -> list[Location]:
+    def load_locations(self, location_data: TextIO) -> list[Location]:
         """ Reads the location data and returns a list of locations. In our case, there are 5 of them."""
         result = []
-        with open(location_data) as f:
-            line = f.readline().strip()
-            while line is not None:
-                name = line
-                location_id = int(f.readline().strip())
-
-                items_in_location = []
-                for item in self.items:
-                    if item.start_position == location_id:
-                        items_in_location.append(item)
-
-                short_description = f.readline().strip()
-                long_description = ""
-                long_line = f.readline().strip()
-
-                while long_line != "END":
-                    long_description += long_line + " "
-                    long_description = f.readline().strip()
-
-                y = 0
-                x = 0
-                for row in self.map:
-                    for spot in row:
-                        if spot == id:
-                            break
-                        x += 1
-                    y += 1
-
-                new_location = Location(name, x, y, short_description, long_description, items_in_location, location_id)
-                result.append(new_location)
-
+        lines = location_data.readlines()
+        i = 0
+        while i < len(lines):
+            loc_name = lines[i].strip()
+            loc_id = int(lines[i+1].strip())
+            brief = lines[i+2].strip()
+            long = lines[i+3].strip()
+            x, y = self.get_coordinates(loc_id)
+            new_loc = Location(name=loc_name, x=x, y=y, brief=brief, long=long, id=loc_id, items=None)
+            result.append(new_loc)
+            i += 6
         return result
 
     # NOTE: The method below is REQUIRED. Complete it exactly as specified.
@@ -317,17 +230,60 @@ class World:
         """
         for location in self.locations:
             if location.x == x and location.y == y:
+                if location.id == -1:
+                    return None
                 return location
-
-        return
-
-    def update_position(self, player: Player, choice: str) -> None:
-        #determine player's location if go west ..., if go east...,
-        #if choice == "go north"
         return None
 
+    def get_coordinates(self, loc_id: int) -> Optional[tuple]:
+        """ Returns the coordinates of the location with the given loc_id. """
+        for i in self.map:
+            for j in i:
+                if loc_id == j:
+                    y = i.index(loc_id)
+                    x = self.map.index(i)
+                    return (x, y)
+
+        return None
+
+    def update_position(self, player: Player, choice: str) -> None:
+        """ Update the player's position on the map. """
+        if choice == "go north":
+            player.x += 1
+        elif choice == "go south":
+            player.x -= 1
+        elif choice == "go west":
+            player.y -= 1
+        elif choice == "go east":
+            player.y += 1
+        return None
+
+    def available_actions(self, location: Location):
+        """
+        Return the available actions in this location.
+        The actions should depend on the items available in the location
+        and the x,y position of this location on the world map.
+        """
+        pick_subjects = []
+        if location.items is not None:
+            pick_subjects = [f"pick {item}" for item in location.items]
+        actions = ["go north", "go south", "go west", "go east"]
+        north_location = self.get_location(location.x + 1, location.y)
+        south_location = self.get_location(location.x - 1, location.y)
+        west_location = self.get_location(location.x, location.y - 1)
+        east_location = self.get_location(location.x, location.y + 1)
+        if north_location is None:
+            actions.remove("go north")
+        elif south_location is None:
+            actions.remove("go south")
+        if west_location is None:
+            actions.remove("go west")
+        elif east_location is None:
+            actions.remove("go east")
+        return actions + pick_subjects
 
     def handle_action(self, player: Player, location: Location, action: str):
+        """ Handle all the other actions that do not require any modification. """
         if action == "look":
             print(location.brief if location.visited else location.long)
         elif action == "inventory":
@@ -336,6 +292,8 @@ class World:
             print(player.score)
 
     def check_fly(self, player: Player):
+        """ Return True if flying option is available else retur False. Flying option becomes
+        available after player's score is greater than 30."""
         if player.score > 30:
             print("You can now fly to the exam center whenever you want by using the command fly exam center")
             player.can_fly = True
@@ -345,19 +303,27 @@ class World:
 
             player.can_fly = False
 
-    def pick_item(self, player: Player, item: Item, player_location: Location):
+    def pick_item(self, player: Player, item: Item, player_location: Location) -> bool:
+        """ Pick the item and add it to player's inventory return True if the item is picked, else return False. """
         if item.current_position == player_location.id:
             player.inventory.append(item)
             player_location.items.remove(item)
             player.score += item.target_points
             self.check_fly(player)
+            return True # item picked.
+        else:
+            print("You can't pick that item.")
+            return False # item was not picked.
 
-    def find_item(self, name):
+    def find_item(self, name) -> Optional[Item]:
+        """ Return the item with the given name. """
         for item in self.items:
             if name == item.name:
                 return item
-        return None
+        return
 
     def fly_exam_center(self, player):
-        # send the player to the exam center.
+        """ Fly the player to the exam center. Ignore physics laws and air friction. """
+        player.x = 2
+        player.y = 1
         return
