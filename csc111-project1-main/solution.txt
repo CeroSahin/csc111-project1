@@ -1,0 +1,17 @@
+go south
+investigate
+announcement board
+pick t-card
+score
+go east
+investigate
+squirrel
+pick lucky pen
+score
+go east
+investigate
+study area
+pick cheat sheet
+score
+go west
+go south

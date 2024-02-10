@@ -1,0 +1,77 @@
+investigate
+food
+investigate
+cash register
+investigate
+table
+pick key V
+investigate
+door
+open magic door
+key V
+go south
+investigate
+reception
+pick key Q
+investigate
+garden
+investigate
+announcement board
+pick t-card
+investigate
+door
+go east
+investigate
+squirrel
+pick lucky pen
+investigate
+leaves
+investigate
+statue
+pick key B
+investigate door
+go east
+investigate
+reception
+pick key T
+investigate
+stairs
+investigate
+study area
+pick cheat sheet
+investigate
+door
+go north
+investigate
+field
+investigate
+victoria
+pick key E
+investigate
+burwash
+investigate
+door
+open magic door
+key B
+open magic door
+key E
+open magic door
+key T
+open magic door
+key Q
+open magic door
+key V
+go south
+open magic door
+key B
+open magic door
+key Q
+open magic door
+key T
+open magic door
+key E
+go west
+open magic door
+key T
+open magic door
+key B

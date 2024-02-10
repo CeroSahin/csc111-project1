@@ -1,0 +1,18 @@
+3 5 15 cheat sheet
+1 5 20 t-card
+2 5 25 lucky pen
+0 5 50 answer sheet
+2 0 5 key B
+3 1 5 key T
+1 2 5 key Q
+4 3 5 key E
+0 4 5 key V
+
+- -
+fun open
+- u
+- -
+- n
+- f
+
+- -
