@@ -78,12 +78,15 @@ if __name__ == "__main__":
 
             #if choice in commands:  # if player wants to move.
             if "investigate" in choice:
-                for i in range(len(w.get_location(p.x, p.y).investigations)):
-                    print(w.get_location(p.x, p.y).investigations[i][0])
-                location_to_investigate = input("Where should I investigate? ")
-                output = w.investigate(p, location_to_investigate)
-                if output is not None:
-                    choice = output
+                if location.name == "Exam Center":
+                    print("There is nothing to investigate here")
+                else:
+                    for i in range(len(w.get_location(p.x, p.y).investigations)):
+                        print(w.get_location(p.x, p.y).investigations[i][0])
+                    location_to_investigate = input("Where should I investigate? ")
+                    output = w.investigate(p, location_to_investigate)
+                    if output is not None:
+                        choice = output
 
             if "fly" in choice:
                 if p.can_fly:
