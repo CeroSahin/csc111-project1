@@ -50,7 +50,8 @@ if __name__ == "__main__":
             print("a")
 
         if location.id == 5 and required_items.issubset(set(p.inventory)):
-            print("Congratulations you were able to come to Exam Center and collect all your missing items before the exam started. Good luck on the test!")
+            print("Congratulations you were able to come to Exam Center and collect all your "
+                  "missing items before the exam started. Good luck on the test!")
             p.victory = True
             break
 
@@ -76,7 +77,6 @@ if __name__ == "__main__":
                     print(command)
                 choice = input("\nWhat should I do?: ")
 
-            #if choice in commands:  # if player wants to move.
             if "investigate" in choice:
                 if location.name == "Exam Center":
                     print("There is nothing to investigate here")
@@ -127,7 +127,8 @@ if __name__ == "__main__":
                 p.moves -= 1
 
             elif choice not in (w.available_actions(location) + menu) and all(
-                    [c not in choice for c in ["investigate", "fly", "open magic door", "pick", "open ultimate magic door"]]):
+                    [c not in choice for c in ["investigate", "fly",
+                                               "open magic door", "pick", "open ultimate magic door"]]):
                 print("I cannot go this way.")
 
             elif choice == "[picks]":
@@ -135,13 +136,13 @@ if __name__ == "__main__":
                     print(pick)
                 choice = input("\nWhat should I pick?: ")
 
-            if "pick" in choice:  # if player wants to pick up objects. #belirtilen itemlerden birini seçip seçmediğine bakıyor, answer sheet?
+            if "pick" in choice:
                 item_name_list = choice.split()[1:]
                 item_name = item_name_list[0]
                 for i in range(1, len(item_name_list)):
                     item_name = item_name + " " + str(item_name_list[i])
                 item = w.find_item(
-                    item_name)  # item belirtilen itemler arasında mı diye bakıyor --> tekrar, item yoksa None'a eşit olabilr
+                    item_name)
                 if item is not None:
                     picked = w.pick_item(p, item, location)  # itemin lokasyonda olup olmadığına bakıyor
                     if picked:
