@@ -184,7 +184,8 @@ class UltimateMagicDoor(MagicDoor):
             winning_player = self.play_xox()
             if winning_player[:7] == "Player1":
                 print(
-                    "Congratulations you've won the XOX game and are able to open the ultimate magic door. Your secret message is: VTE")
+                    "Congratulations you've won the XOX game and are able to open the ultimate magic door. "
+                    "Your secret message is: VTE")
             else:
                 print("You have lost the game :(")
         else:
@@ -214,7 +215,8 @@ class UltimateMagicDoor(MagicDoor):
                 for line in xox_list:
                     print(line)
                 move = int(input(
-                    "for a XOX table whose positions are numbered as\n\n1 2 3\n4 5 6\n7 8 9\n\nWhich index do you want to put 'X' in?"))
+                    "for a XOX table whose positions are numbered as\n\n1 2 3\n4 5 6\n7 8 9\n\nWhich index do"
+                    " you want to put 'X' in?"))
             else:
                 move = random.choice(available_moves)
 
@@ -245,7 +247,8 @@ class World:
     Representation Invariants:
         - all([[-1 <= position <= 1 for position in axis_values] for axis_values in self.map])
         - all([item.name in ["Cheat Sheet", "T-Card", "Lucky Pen", "Answer Sheet"] for item in items])
-        - all([location.name in ["Buttery", "Trinity", "Queen's Park", "EJ Pratt", "Victoria", "Exam Center", "Location -1"] for location in locations])
+        - all([location.name in ["Buttery", "Trinity", "Queen's Park", "EJ Pratt", "Victoria", "Exam Center",
+        "Location -1"] for location in locations])
     """
     map: list[list[int]]
     items: list[Item]
@@ -405,7 +408,7 @@ class World:
         return None
 
     def get_coordinates(self, loc_id: int) -> Optional[tuple]:
-        """ Returns the coordinates of the location with the given loc_id. """  # her -1 location için aynı x,y value'sunu verir
+        """ Returns the coordinates of the location with the given loc_id. """
         for i in self.map:  # row, y
             for j in i:  # x
                 if loc_id == j:
@@ -510,7 +513,8 @@ class World:
         Different cases:
             1-player doesn't have the correct key
             3-player opens an empty door
-            4-player has to enter the password --> (if correct congratulation message, able to pick up answer sheet), (if false message) +
+            4-player has to enter the password --> (if correct congratulation message, able to pick up answer sheet),
+            (if false message) +
             5-player opens the door with the correct key and recieves the password
         """
         if self.get_location(p.x, p.y) == magic_door.location and key.target_position == self.get_location(p.x, p.y).id:
@@ -518,7 +522,11 @@ class World:
                 tried_password = input("Enter password: ")
                 if tried_password == magic_door.password:
                     print(
-                        "Congratulations, you entered the right password and opened the lock! The beaming light coming inside is too bright. But as your eyes get more used to the brightness you start to see a document which has the name of your CS proffesors. At first glance it looks like a practice test. However when you look closely you see that it is a test that you haven't seen before and it has the answers inside. It is an answer sheet!")
+                        "Congratulations, you entered the right password and opened the lock! The beaming light "
+                        "coming inside is too bright. But as your eyes get more used to the brightness you start to "
+                        "see a document which has the name of your CS proffesors. At first glance it looks like a "
+                        "practice test. However when you look closely you see that it is a test that you haven't seen "
+                        "before and it has the answers inside. It is an answer sheet!")
                     for item in self.get_location(p.x, p.y).items:
                         if item.name == "answer sheet":
                             item.can_pick_up = True
@@ -539,7 +547,8 @@ class World:
         Can also be used to determine whether an object can be picked up
         Cases:
             -specific location isn't in Location
-            -specific location is in Location --> print out the description ,if any item is associated with the description --> able to pick it up (doesn't pick it up --> False)            -
+            -specific location is in Location --> print out the description ,if any item is associated
+            with the description --> able to pick it up (doesn't pick it up --> False)            -
         """
         for specific_location in self.get_location(p.x, p.y).investigations:
             if location in specific_location:
