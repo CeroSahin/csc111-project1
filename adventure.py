@@ -26,7 +26,7 @@ if __name__ == "__main__":
 
     required_items = w.required_items()
 
-    menu = ["look", "inventory", "score", "quit", "moves"]  # backi sildim, moves ekledim
+    menu = ["look", "inventory", "score", "quit", "moves"]  
     commands = ["go north", "go south", "go west", "go east", "fly", "open magic door", "open ultimate magic door",
                 "investigate"]
     picks = ["pick t-card", "pick cheat sheet", "pick lucky pen", "pick key ...", "some secret items..."]
@@ -55,7 +55,7 @@ if __name__ == "__main__":
             p.victory = True
             break
 
-        if p.moves == 0 and p.victory is not True:  # ikinci condition ekledim
+        if p.moves == 0 and p.victory is not True:  
             print("Time is over, Sorry pal!")
             break
 
@@ -144,7 +144,7 @@ if __name__ == "__main__":
                 item = w.find_item(
                     item_name)
                 if item is not None:
-                    picked = w.pick_item(p, item, location)  # itemin lokasyonda olup olmadığına bakıyor
+                    picked = w.pick_item(p, item, location)  
                     if picked:
                         print(f"Item {item_name} is added to your inventory")
                 else:
@@ -165,5 +165,5 @@ if __name__ == "__main__":
             if choice in menu:
                 w.handle_action(p, location, choice)
 
-        else:  # hangi if'in else'i, her yorumdan sonra veriyor
+        else: 
             print("Sorry, I do not get this command!")
