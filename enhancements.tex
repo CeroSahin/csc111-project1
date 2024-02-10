@@ -6,7 +6,7 @@
 \usepackage[margin=0.75in]{geometry}
 
 \title{CSC111 Winter 2024 Project 1}
-\author{TODO: FILL IN YOUR NAME(S) HERE}
+\author{Defne Eris and Ceren Sahin}
 \date{\today}
 
 \begin{document}
@@ -17,28 +17,36 @@
 
 \begin{enumerate}
 
-\item Describe your enhancement \#1 here
-	\begin{itemize}
-	\item Brief description of what the enhancement is (if it's a puzzle, also describe what steps the player must take to solve it):
-	\item Complexity level (choose from low/medium/high):
-	\item Reasons you believe this is the complexity level (e.g. mention implementation details, how much code did you have to add/change from the baseline, what challenges did you face, etc.)
-	% Feel free to add more subheadings if you need
-	\end{itemize}
-
-% Uncomment below section if you have more enhancements; copy-paste as many times as needed
-%\item Describe your enhancement here
-%	\begin{itemize}
-%	\item Basic description of what the enhancement is:
-%	\item Complexity level (low/medium/high):
-%	\item Reasons you believe this is the complexity level (e.g. mention implementation details 
-%	% Feel free to add more subheadings if you feel the need
-%	\end{itemize}
+\subsection*{Fly}
+\begin{itemize}
+    \item The fly command becomes available when the player reaches a score of 100 points. With the fly command the player can travel to any location that they want by typing firstly “fly” and the name of the location after the game asks which location the player wants to go to.
+    \item Low complexity: The program has to check whether the player’s score goes over 100 points every time they pick up an object and adjust the Player instance's attributes accordingly.
+\end{itemize}
+\subsection*{Magic Doors and Keys}
+\begin{itemize}
+    \item In our game we put locked magic doors to each location. Each magic door has a unique key that opens it. In this game, the keys are instances of the Item class and they are scattered around in different locations. So, to open a magic door the player has to find the correct key and open the magic door at the correct location. The magic door in the location “Queen’s Park” and the door in the location “Buttery” asks for an additional password. Apart from these, the player will receive a secret message containing each one of the letters of the word “fun”. To open the door in the Buttery the player has to correctly arrange the letters and enter the correct password: “fun”. Doing this will describe what is inside of the door and the player will be able to pick a secret item, or answer sheet which is worth the most points.
+    \item High Complexity:  Implemented a new magic door class, Program reads information about both the keys and the doors from the items.txt file
+\end{itemize}
+\subsection*{Ultimate Magic Door and XOX Game}
+\begin{itemize}
+    \item In the game the magic door at the exam center belongs to a child class of the Magic Door Class which is the Ultimate Magic Door Class. When the player tries to use the command “open ultimate magic door” in the Exam Center, the player will have to play a game of XOX to obtain the secret message. If the player wins the game, they will get the message of “VET”. The letters in the secret message stand for “Victoria, EJ Pratt, Trinity” which gives the order of the letters in the password that will be used to open the door in Trinity. Therefore if the player opens the doors in these locations they will get the letters “f”, “u”, and “n” respectively.
+    \item High Complexity: Implementing the XOX game was harder than creating an Ultimate Magic Door child class.
+\end{itemize}
+\subsection*{Investigate}
+\begin{itemize}
+    \item For every location apart from the Exam Center we decided to add an investigate command which gives a more detailed explanation of the specific selected item or place in the location. For instance, if the player types in the command “investigate” in the location “Buttery” the game will ask which part of Buttery that the player wants to investigate while giving four options. In this case, they will be “food, cash register, table, door”.  After that, the game will print a more detailed description of that item or place which includes clues about where the items in the game are at. For instance, in the example case if the player decides to investigate “table”, they will receive a description such as “You see a couple of empty looking tables that have some notebooks, bags, water bottles, a key with the letter V written on it” which includes the mention of a key. To pick up each item in the game the player has to use the “pick up {item}” command right after investigating where the item is located otherwise they can’t pick that item. For instance, if the player wants to pick “key V”, they have to pick it up right after investigating “table” in Trinity. Otherwise, if they decide to do another move they cannot pick the item up. 
+    \item Highest Complexity: The most complex one to implement, had to write new descriptions for the specific investigations for each location, associated some items with these investigations by using list methods, and while the “investigate” method was in the world-class in the game.py file it also had to keep track of the next move that the player did in order to assess whether the item could be picked up or not, trying to find ways to connect these items, commands was the hardest part of writing the investigate command.
+\end{itemize}
 
 \end{enumerate}
 
 
 \section*{Extra Gameplay Files}
 
-If you have any extra \texttt{gameplay\#.txt} files, describe them below.
+\section*{Notes on solution.txt and gameover.txt}
+\begin{itemize}
+    \item In the solution.txt scenario, to win the game, the player goes to the locations that have the required items, investigates the parts of the locations that contain the items and pick the object right after investigating it, and goes to the Exam Center afterward.
+    \item In the gameover.txt scenario, the player tries to go to every location and investigates all of the individual places in the locations, trying to open all of the magic doors by trying every key that they have.
+\end{itemize}
 
 \end{document}
