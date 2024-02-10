@@ -157,7 +157,7 @@ class MagicDoor:
         -self.name in ["Buttery", "Trinity", "Queen's Park", "Victoria", "EJ Pratt"]
         -self.key.name in ["key B", ""key T", "key Q", "key V", "key E"]
         -len(self.password) >= 3
-        #self.secret_message'la ilgili ekstra bir RI yazmadım
+        
     """
     location: Location
     key: Item
@@ -303,7 +303,7 @@ class World:
             begin = int(row[0])
             end = int(row[1])
             points = int(row[2])
-            name = " ".join(row[3:])  # 2 yazıyordu bence 3 olması gerekiyor
+            name = " ".join(row[3:])  
             # if i >= 5:
             #   new_item = Key(name, begin, end, points)
             # else:
@@ -368,7 +368,7 @@ class World:
             investigations = self.form_investigations(loc_name, lines)
 
             new_loc = Location(name=loc_name, x=x, y=y, brief=brief, long=long, id=loc_id,
-                               items=items_in_location, investigations=investigations)  # itemlar None mı?
+                               items=items_in_location, investigations=investigations)  
             result.append(new_loc)
             i += 6
         return result
@@ -434,9 +434,6 @@ class World:
         The actions should depend on the items available in the location
         and the x,y position of this location on the world map.
         """
-        # pick_subjects = []
-        # if location.items is not None:
-        #    pick_subjects = [f"pick {item}" for item in location.items]
         actions = ["go north", "go south", "go west", "go east"]
         north_location = self.get_location(location.x - 1, location.y)  # + - değiştirdim
         south_location = self.get_location(location.x + 1, location.y)  # + - değiştirdim
